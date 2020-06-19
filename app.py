@@ -15,7 +15,7 @@ from flask import Flask,request,jsonify
 from werkzeug.utils import secure_filename
 import os
 
-# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'/app/.apt/usr/bin/tesseract'
 app=Flask(__name__)
 UPLOAD_FOLDER = r'uploads/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -273,24 +273,26 @@ def getResult():
       resize_orig = imutils.resize(image, width=W)
       # stage 1 clean image
       thresh = cleanImage(resize_proc)
-
+      print("coming here 1")
       # stage 2 detect rois
       rrects = extractROIs(thresh, resize_orig)
-
+      print("coming here 2")
       # stage 3 process rois 
       rois, meanAngle, stdAngle = cropRois(resize_orig, rrects)
-
+      print("coming here 3")
       # if (face is not None):
       #   shoWait(face)
 
       # stage 4 read the rois
       data = readRois(rois, meanAngle, stdAngle)
-
+      print("coming here 4")
       # stage 5 detect face
       face = grabFace(resize_orig, meanAngle)
+      print("coming here 5")
       if (face is not None):
         retval, imgBuffer = cv2.imencode(".jpg", imutils.resize(face, 240))
         data["avatar"] = base64.b64encode(imgBuffer).decode("utf-8")
+      print("coming here 6")  
       return jsonify(data)  
 
 
