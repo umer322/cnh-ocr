@@ -12,7 +12,7 @@ MarkupSafe
 matplotlib
 networkx
 numpy
-opencv-python
+opencv-python-headless
 Pillow
 pyparsing
 pytesseract
