@@ -17,7 +17,7 @@ import os
 
 # pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 app=Flask(__name__)
-UPLOAD_FOLDER = r'.\uploads'
+UPLOAD_FOLDER = r'../uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 W = 800 
 fontFace = cv2.FONT_HERSHEY_PLAIN # debug text on image
