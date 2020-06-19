@@ -17,8 +17,10 @@ import os
 
 # pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 app=Flask(__name__)
-UPLOAD_FOLDER = r'../uploads'
+UPLOAD_FOLDER = r'uploads/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+MYDIR = os.path.dirname(__file__)
 W = 800 
 fontFace = cv2.FONT_HERSHEY_PLAIN # debug text on image
 cleanText = r"[^A-Z0-9.,\-\s\/]" # clean data text 
@@ -262,10 +264,10 @@ def getResult():
       return jsonify({"error":"no file sent"})
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
-      file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      file.save(os.path.join(MYDIR + "/" + app.config['UPLOAD_FOLDER'], filename))
 
       # load image
-      image = cv2.imread(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      image = cv2.imread(os.path.join(MYDIR + "/" + app.config['UPLOAD_FOLDER'], filename))
       # resize 2 and keep one for debuging
       resize_proc = imutils.resize(image, width=W)
       resize_orig = imutils.resize(image, width=W)
